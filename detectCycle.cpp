@@ -42,18 +42,23 @@ class LinkedList{
 
 };
 
-Node *findMiddleElement(Node *&head){
-
+bool detectCycle(Node *head){
     Node *slow=head;
-    Node *fast= head;
-    while(fast!=NULL && fast->next!=NULL){
+    Node *fast=head;
+    if(!head){
+        return false;
+    }
+
+    while(fast && fast->next){
         slow=slow->next;
         fast=fast->next->next;
+        if(slow==fast){
+            return true;
+        }
     }
-    return slow;
+    return false;
 
 }
-
 
 
 
@@ -70,9 +75,7 @@ int main(){
     ll1.insertAtTail(9);
     ll1.display();
 
-    Node *middleElement= findMiddleElement(ll1.head);
-    cout<<middleElement->val<<endl;
-   
+    cout<<detectCycle(ll1.head);
 
 
     
